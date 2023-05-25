@@ -23,38 +23,44 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
                     <?php
                     if (isset($_GET['id'])) {
                         $id_siswa = mysqli_real_escape_string($koneksi, $_GET['id']);
-                        $query = "SELECT * FROM siswa WHERE id='$id_siswa'";
+                        $query = "SELECT 
+                        siswa.id AS id_siswa, 
+                        siswa.nama AS nama_siswa, 
+                        siswa.email AS email_siswa, 
+                        siswa.no_hp AS no_hp_siswa,
+                        jurusan.jurusan AS nama_jurusan
+                        FROM siswa, jurusan WHERE jurusan.id = siswa.id_jurusan";
                         $query_run = mysqli_query($koneksi, $query);
 
                         if (mysqli_num_rows($query_run) > 0) {
                             $siswa = mysqli_fetch_array($query_run);
-                    ?>
+                            ?>
                             <div class="mb-3">
                                 <label>Nama Siswa</label>
                                 <p class="form-control">
-                                    <?= $siswa['nama']; ?>
+                                    <?= $siswa['nama_siswa']; ?>
                                 </p>
                             </div>
                             <div class="mb-3">
                                 <label>Email Siswa</label>
                                 <p class="form-control">
-                                    <?= $siswa['email']; ?>
+                                    <?= $siswa['email_siswa']; ?>
                                 </p>
                             </div>
                             <div class="mb-3">
                                 <label>Nomor Handphone</label>
                                 <p class="form-control">
-                                    <?= $siswa['no_hp']; ?>
+                                    <?= $siswa['no_hp_siswa']; ?>
                                 </p>
                             </div>
                             <div class="mb-3">
                                 <label>Jurusan Siswa</label>
                                 <p class="form-control">
-                                    <?= $siswa['jurusan']; ?>
+                                    <?= $siswa['nama_jurusan']; ?>
                                 </p>
                             </div>
 
-                    <?php
+                            <?php
                         } else {
                             echo "<h4> Data Siswa Tidak Ditemukan </h4";
                         }

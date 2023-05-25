@@ -9,21 +9,16 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
 ?>
 
 <div class="container mt-5">
-<?php  include('../includes/inc_message.php') ?>
-    
+    <?php include('../includes/inc_message.php') ?>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4> Tambahkan Siswa <a href="admin_depan.php" class="btn btn-danger float-end">Kembali</a></h4> 
-                    </div>
-                    <div class="card-body">
-                        <form action="../controllers/controller_siswa.php" method="POST">
-
-                        <!-- <div class="mb-3">
-                            <label>NIS</label>
-                            <input type="text" name="NIS" class="form-control">
-                        </div> -->
+                    <h4> Tambahkan Siswa <a href="admin_depan.php" class="btn btn-danger float-end">Kembali</a></h4>
+                </div>
+                <div class="card-body">
+                    <form action="../controllers/controller_siswa.php" method="POST">
                         <div class="mb-3">
                             <label>Nama Siswa</label>
                             <input type="text" name="nama" class="form-control">
@@ -42,25 +37,36 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
                         </div>
                         <div class="mb-3">
 
-                            <label>Jurusan</label>
-                            <select class="form-control" name="jurusan" aria-placeholder="Pilih Jurusan">
-                            
-                            <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                            <option value="Multimedia">Multimedia</option>
-                            <option value="Akutansi">Akutansi</option>
-                            <option value="Perbankan_Syariah">Perbankan Syariah</option>
-                            
+                            <label for="jurusan">Jurusan</label>
+                            <select class="form-control" name="id_jurusan">
+
+                                <?php
+                                $query = "SELECT * FROM jurusan";
+                                $query_run = mysqli_query($koneksi, $query);
+                                if (mysqli_num_rows($query_run) > 0) {
+                                    foreach ($query_run as $jurusan) {
+                                        ?>
+                                        <option value="<?= $jurusan['id'] ?>">
+                                        <?= $jurusan['jurusan'] ?>
+                                        </option>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "Belum Ada Data Jurusan";
+                                }
+                                ?>
+
                             </select>
                         </div>
                         <div class="mb-3">
                             <button type="submit" name="simpan" class="btn btn-primary">Simpan Data</button>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <?php
 include("../includes/inc_footer.php");

@@ -26,9 +26,9 @@ if (isset($_POST['ubah_data_guru'])) {
     $email = mysqli_real_escape_string($koneksi, $_POST['email']);
     $no_hp = mysqli_real_escape_string($koneksi, $_POST['no_hp']);
     $alamat = mysqli_real_escape_string($koneksi, $_POST['alamat']);
-    $jurusan = mysqli_real_escape_string($koneksi, $_POST['jurusan']);
+    $id_mapel = mysqli_real_escape_string($koneksi, $_POST['id_mapel']);
 
-    $query = "UPDATE guru SET nama='$nama', email='$email', no_hp='$no_hp', alamat='$alamat' ,jurusan='$jurusan,' WHERE id='$id_guru'";
+    $query = "UPDATE guru SET nama='$nama', email='$email', no_hp='$no_hp', alamat='$alamat', id_mapel='$id_mapel' WHERE id='$id_guru'";
     $query_run = mysqli_query($koneksi, $query);
 
     if($query_run) {
@@ -48,9 +48,9 @@ if (isset($_POST['simpan'])) {
     $email = mysqli_real_escape_string($koneksi, $_POST['email']);
     $no_hp = mysqli_real_escape_string($koneksi, $_POST['no_hp']);
     $alamat = mysqli_real_escape_string($koneksi, $_POST['alamat']);
-    $jurusan = mysqli_real_escape_string($koneksi, $_POST['jurusan']);
+    $id_mapel = mysqli_real_escape_string($koneksi, $_POST['id_mapel']);
 
-    $query = "INSERT INTO guru (nama, email, no_hp, alamat,jurusan) VALUES ('$nama', '$email', '$no_hp', '$alamat', '$jurusan')";
+    $query = "INSERT INTO guru (nama, email, no_hp, alamat, id_mapel) VALUES ('$nama', '$email', '$no_hp', '$alamat', '$id_mapel')";
 
     $query_run = mysqli_query($koneksi, $query);
     if($query_run) {

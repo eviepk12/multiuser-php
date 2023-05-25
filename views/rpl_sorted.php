@@ -16,53 +16,53 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
             <div class="card">
 
                 <div class="card-header">
-                    <h4>Detail Data Guru <a href="admin_depan.php" class="btn btn-danger float-end">Kembali</a> </h4>
+                    <h4>Detail Data Siswa RPL<a href="admin_depan.php" class="btn btn-danger float-end">Kembali</a> </h4>
                 </div>
 
                 <div class="card-body">
                     <?php
                     if (isset($_GET['id'])) {
-                        $id_guru = mysqli_real_escape_string($koneksi, $_GET['id']);
+                        $id_siswa = mysqli_real_escape_string($koneksi, $_GET['id']);
                         $query = "SELECT 
-                        guru.id AS id_guru, 
-                        guru.nama AS nama_guru, 
-                        guru.email AS email_guru, 
-                        guru.no_hp AS no_hp_guru,
-                        mata_pelajaran.mata_pelajaran AS nama_mapel
-                        FROM guru, mata_pelajaran WHERE mata_pelajaran.id = guru.id_mapel";
+                        siswa.id AS id_siswa, 
+                        siswa.nama AS nama_siswa, 
+                        siswa.email AS email_siswa, 
+                        siswa.no_hp AS no_hp_siswa,
+                        jurusan.jurusan AS nama_jurusan
+                        FROM siswa, jurusan WHERE jurusan.id = siswa.id_jurusan AND jurusan.id = 1";
                         $query_run = mysqli_query($koneksi, $query);
 
                         if (mysqli_num_rows($query_run) > 0) {
-                            $guru = mysqli_fetch_array($query_run);
-                    ?>
+                            $siswa = mysqli_fetch_array($query_run);
+                            ?>
                             <div class="mb-3">
-                                <label>Nama Guru</label>
+                                <label>Nama Siswa</label>
                                 <p class="form-control">
-                                    <?= $guru['nama_guru']; ?>
+                                    <?= $siswa['nama_siswa']; ?>
                                 </p>
                             </div>
                             <div class="mb-3">
-                                <label>Email Guru</label>
+                                <label>Email Siswa</label>
                                 <p class="form-control">
-                                    <?= $guru['email_guru']; ?>
+                                    <?= $siswa['email_siswa']; ?>
                                 </p>
                             </div>
                             <div class="mb-3">
                                 <label>Nomor Handphone</label>
                                 <p class="form-control">
-                                    <?= $guru['no_hp_guru']; ?>
+                                    <?= $siswa['no_hp_siswa']; ?>
                                 </p>
                             </div>
                             <div class="mb-3">
-                                <label>Mata Pelajaran</label>
+                                <label>Jurusan Siswa</label>
                                 <p class="form-control">
-                                    <?= $guru['nama_mapel']; ?>
+                                    <?= $siswa['nama_jurusan']; ?>
                                 </p>
                             </div>
 
-                    <?php
+                            <?php
                         } else {
-                            echo "<h4> Data Guru Tidak Ditemukan </h4";
+                            echo "<h4> Data Siswa Tidak Ditemukan </h4";
                         }
                     }
                     ?>

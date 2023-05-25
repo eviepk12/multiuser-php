@@ -9,7 +9,7 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
 ?>
 
 <div class="container mt-5">
-<?php  include('../includes/inc_message.php') ?>
+    <?php include('../includes/inc_message.php') ?>
 
     <div class="col-md-12">
         <div class="card">
@@ -27,7 +27,7 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
 
                     if (mysqli_num_rows($query_run) > 0) {
                         $siswa = mysqli_fetch_array($query_run);
-                ?>
+                        ?>
 
                         <form action="../controllers/controller_siswa.php" method="POST">
                             <input type="hidden" name="id_siswa" value="<?= $siswa['id']; ?>">
@@ -45,27 +45,35 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
                                 <input type="text" name="no_hp" value="<?= $siswa['no_hp']; ?>" class="form-control">
                             </div>
                             <div class="mb-3">
-                            <div class="mb-3">
-                                <label>Alamat</label>
-                                <input type="text" name="alamat" value="<?= $siswa['alamat']; ?>" class="form-control">
-                            </div>
-                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <label>Alamat</label>
+                                    <input type="text" name="alamat" value="<?= $siswa['alamat']; ?>" class="form-control">
+                                </div>
+                                <div class="mb-3">
 
-                                <label>Jurusan</label>
-                                <select class="form-control" name="jurusan" aria-placeholder="Pilih Jurusan">
+                                    <label>Jurusan</label>
+                                    <select class="form-control" name="id_jurusan">
+                                        <?php
+                                        $query1 = "SELECT * FROM jurusan";
+                                        $query_run1 = mysqli_query($koneksi, $query1);
 
-                                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                                    <option value="Multimedia">Multimedia</option>
-                                    <option value="Akutansi">Akutansi</option>
-                                    <option value="Perbankan_Syariah">Perbankan Syariah</option>
-
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" name="ubah_data_siswa" class="btn btn-primary">Ubah Data Siswa</button>
-                            </div>
+                                        if (mysqli_num_rows($query_run) > 0) {
+                                            foreach ($query_run1 as $jurusan) {
+                                                ?>
+                                                <option value="<?= $jurusan['id'] ?>"><?= $jurusan['jurusan'] ?></option>
+                                                <?php
+                                            }
+                                        } else {
+                                            echo "<h5>Belum Ada Data Jurusan</h5>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" name="ubah_data_siswa" class="btn btn-primary">Ubah Data Siswa</button>
+                                </div>
                         </form>
-                <?php
+                        <?php
                     } else {
                         echo "<h4> Data Siswa Tidak Ditemukan </h4>";
                     }

@@ -9,7 +9,7 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
 ?>
 
 <div class="container mt-5">
-<?php  include('../includes/inc_message.php') ?>
+    <?php include('../includes/inc_message.php') ?>
 
     <div class="col-md-12">
         <div class="card">
@@ -27,7 +27,7 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
 
                     if (mysqli_num_rows($query_run) > 0) {
                         $guru = mysqli_fetch_array($query_run);
-                ?>
+                        ?>
 
                         <form action="../controllers/controller_guru.php" method="POST">
                             <input type="hidden" name="id_guru" value="<?= $guru['id']; ?>">
@@ -45,27 +45,38 @@ if (!in_array("spp", $_SESSION['admin_akses'])) {
                                 <input type="text" name="no_hp" value="<?= $guru['no_hp']; ?>" class="form-control">
                             </div>
                             <div class="mb-3">
-                            <div class="mb-3">
-                                <label>Alamat</label>
-                                <input type="text" name="alamat" value="<?= $guru['alamat']; ?>" class="form-control">
-                            </div>
-                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <label>Alamat</label>
+                                    <input type="text" name="alamat" value="<?= $guru['alamat']; ?>" class="form-control">
+                                </div>
+                                <div class="mb-3">
 
-                                <label>Jurusan</label>
-                                <select class="form-control" name="jurusan" aria-placeholder="Pilih Jurusan">
+                                    <label>Jurusan</label>
+                                    <select class="form-control" name="id_mapel">
 
-                                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                                    <option value="Multimedia">Multimedia</option>
-                                    <option value="Akutansi">Akutansi</option>
-                                    <option value="Perbankan_Syariah">Perbankan Syariah</option>
+                                        <?php
+                                        $query = "SELECT * FROM mata_pelajaran";
+                                        $query_run = mysqli_query($koneksi, $query);
+                                        if (mysqli_num_rows($query_run) > 0) {
+                                            foreach ($query_run as $mapel) {
+                                                ?>
+                                                <option value="<?= $mapel['id'] ?>">
+                                                    <?= $mapel['mata_pelajaran'] ?>
+                                                </option>
+                                                <?php
+                                            }
+                                        } else {
+                                            echo "Belum Ada Data Mata Pelajaran";
+                                        }
+                                        ?>
 
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" name="ubah_data_guru" class="btn btn-primary">Ubah Data Guru</button>
-                            </div>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" name="ubah_data_guru" class="btn btn-primary">Ubah Data Guru</button>
+                                </div>
                         </form>
-                <?php
+                        <?php
                     } else {
                         echo "<h4> Data Guru Tidak Ditemukan </h4>";
                     }

@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
     $username   = $_POST['username'];
     $password   = $_POST['password'];
     if ($username == '' or $password == '') {
-        $err .= "<li>Silakan masukkan username dan password</li>";
+        $err .= $_SESSION['message'] = "Enter Username and Password";
     }
     if (empty($err)) {
         $sql1 = "select * from admin where username = '$username'";
