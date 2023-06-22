@@ -21,7 +21,7 @@ if (!in_array("siswa", $_SESSION['admin_akses'])) {
         <div class="card-header">
             <h4>Detail Data Siswa <a href="admin_depan.php" class="btn btn-danger float-end">Kembali</a> </h4>
         </div>
-        
+
         <thead>
             <tr>
                 <!-- <th>NIS</th> -->
@@ -45,7 +45,7 @@ if (!in_array("siswa", $_SESSION['admin_akses'])) {
             siswa.email AS email_siswa, 
             siswa.no_hp AS no_hp_siswa,
             jurusan.jurusan AS nama_jurusan
-            FROM siswa, jurusan WHERE jurusan.id = siswa.id_jurusan AND jurusan.id = 1";
+            FROM siswa, jurusan WHERE jurusan.id = siswa.id_jurusan AND jurusan.id = 2";
             $query_run = mysqli_query($koneksi, $query); # melakukan query ke database mysqli_query(connection, query, resultmode)
 
             if (mysqli_num_rows($query_run) > 0) {

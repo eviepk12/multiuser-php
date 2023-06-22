@@ -22,7 +22,6 @@ if (!in_array("siswa", $_SESSION['admin_akses'])) {
             <a href="crud_tambah_siswa.php" class="btn btn-primary float-end m-1">Tambah Data Siswa</a>
         <?php } ?>
         
-        <form action=""></form>
         <a href="rpl_sorted.php" class="btn btn-warning float-start m-1">RPL</a>
         <a href="ak_sorted.php" class="btn btn-warning float-start m-1">AK</a>
         <a href="mm_sorted.php" class="btn btn-warning float-start m-1">MM</a>
